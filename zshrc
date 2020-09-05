@@ -13,9 +13,9 @@ source ~/.zsh/prompt.zsh
 source ~/.zsh/completion.zsh
 source ~/.zsh/plugins.zsh
 
-for i in ~/.shell/*; do;
-    test -r "$i" && source "$i"
-done
+source ~/.shell/aliases.sh
+source ~/.shell/function.sh
 
 # ------
 [[ -f ~/.bashrc_local ]] && source ~/.bashrc_local 
+
