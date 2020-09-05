@@ -38,3 +38,6 @@
 [submodule "vim/plugin_lib/vim-auto-save"]
 	path = vim/plugin_lib/vim-auto-save
 	url = https://github.com/vim-scripts/vim-auto-save
+[submodule "vim/bundle/completor.vim"]
+	path = vim/bundle/completor.vim
+	url = https://github.com/maralla/completor.vim
