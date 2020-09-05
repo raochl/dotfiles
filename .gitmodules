@@ -11,3 +11,30 @@
 [submodule "zsh/plugins/zsh-completions"]
 	path = zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
+[submodule "vim/plugin_lib/vim-pathogen"]
+	path = vim/plugin_lib/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen
+[submodule "vim/plugin_lib/vim-airline"]
+	path = vim/plugin_lib/vim-airline
+	url = https://github.com/bling/vim-airline
+[submodule "vim/plugin_lib/nerdtree"]
+	path = vim/plugin_lib/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule "vim/plugin_lib/vim-nerdtree-tabs"]
+	path = vim/plugin_lib/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs
+[submodule "vim/plugin_lib/verilog_systemverilog.vim"]
+	path = vim/plugin_lib/verilog_systemverilog.vim
+	url = https://github.com/vhda/verilog_systemverilog.vim
+[submodule "vim/plugin_lib/delimitMate"]
+	path = vim/plugin_lib/delimitMate
+	url = https://github.com/Raimondi/delimitMate
+[submodule "vim/plugin_lib/indentLine"]
+	path = vim/plugin_lib/indentLine
+	url = https://github.com/Yggdroot/indentLine
+[submodule "vim/plugin_lib/supertab"]
+	path = vim/plugin_lib/supertab
+	url = https://github.com/ervandew/supertab
+[submodule "vim/plugin_lib/vim-auto-save"]
+	path = vim/plugin_lib/vim-auto-save
+	url = https://github.com/vim-scripts/vim-auto-save
