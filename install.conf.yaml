@@ -7,10 +7,8 @@
 
 - link:
     ~/.vim:
-        force: true
         path: vim/
     ~/.vimrc:
-        relink: true 
         path: vimrc 
     ~/.zshrc:
         force: true 
@@ -21,6 +19,8 @@
     ~/.bash_profile:
         force: true 
         path: bash_profile
+    ~/.bash:
+        path: bash/
     ~/.shell:
         path: shell/
     ~/.zsh:

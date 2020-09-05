@@ -3,15 +3,10 @@ if filereadable("/etc/vimrc")
     source /etc/vimrc 
 endif
 
-" Vimscript file settings -----------------------{{{
-augroup filetype_vim 
-    autocmd ! 
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
-" }}}
 
 " Pathogen -------------------------------- {{{
 " "https://github.com/tpope/vim-pathogen"
+runtime pludgin_lib/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 " }}}
 
@@ -32,8 +27,8 @@ set expandtab
 set hlsearch
 set ignorecase
 set incsearch	" incremental search"
-set list 
-set listchars=eol:¬,tab:>-,trail:•,extends:>,precedes:<
+"set list 
+"set listchars=eol:¬,tab:>-,trail:•,extends:>,precedes:<
 set mouse=a
 set number
 set relativenumber
@@ -228,7 +223,7 @@ nnoremap <leader>u :VerilogGotoInstanceStart<CR>
 "
 " ===================================================
 let delimitMate_quotes = "\" "
-let delimitMate_matchpairs = "(:), [:], {:}"
+let delimitMate_matchpairs = "(:),[:],{:}"
 let delimitMate_expand_space = 1
 
 " ==================================================
@@ -256,15 +251,6 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " =================================================
 let g:SuperTabDefaultCompletionType="<c-n>"
 
-" =================================================
-"
-"	completor 
-"   "https://github.com/maralla/completor.vim"
-"
-"   Completor is an asynchronous code completion framework.
-"   Dont know how to use it, let it installed.
-"
-" =================================================
 
 " =================================================
 "

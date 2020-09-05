@@ -1,1 +1,0 @@
-../pludgin_lib/completor.vim
