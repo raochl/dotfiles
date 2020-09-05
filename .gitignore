@@ -1,0 +1,17 @@
+# Anything ending with a tilde 
+*~
+
+# Anything ending with a .class 
+*.class
+
+# Any vim temp files 
+*.swp
+*.swo
+
+
+# workbench backup files 
+*.bak 
+
+*.log*
+*.old
+

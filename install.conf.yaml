@@ -1,0 +1,27 @@
+- defaults:
+    link:
+        create: true
+        relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.vim:
+        path: vim/
+    ~/.vimrc:
+        relink: true 
+        path: vimrc 
+    ~/.zshrc:
+        force: true 
+        path: zshrc 
+    ~/.bashrc:
+        path: bashrc 
+    ~/.bash_profile:
+        path: bash_profile
+    ~/.shell:
+        path: shell/
+    ~/.zsh:
+        path: zsh/
+
+
+

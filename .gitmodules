@@ -2,3 +2,45 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "vim/pludgin_lib/vim-pathogen"]
+	path = vim/pludgin_lib/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "vim/pludgin_lib/vim-airline"]
+	path = vim/pludgin_lib/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/pludgin_lib/completor.vim"]
+	path = vim/pludgin_lib/completor.vim
+	url = https://github.com/maralla/completor.vim.git
+[submodule "vim/pludgin_lib/indentLine"]
+	path = vim/pludgin_lib/indentLine
+	url = https://github.com/Yggdroot/indentLine.git
+[submodule "vim/pludgin_lib/supertab"]
+	path = vim/pludgin_lib/supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "vim/pludgin_lib/verilog_systemverilog.vim"]
+	path = vim/pludgin_lib/verilog_systemverilog.vim
+	url = https://github.com/vhda/verilog_systemverilog.vim.git
+[submodule "vim/pludgin_lib/vim-snazzy"]
+	path = vim/pludgin_lib/vim-snazzy
+	url = https://github.com/connorholyday/vim-snazzy.git
+[submodule "vim/pludgin_lib/delimitMate"]
+	path = vim/pludgin_lib/delimitMate
+	url = https://github.com/Raimondi/delimitMate
+[submodule "vim/pludgin_lib/nerdtree"]
+	path = vim/pludgin_lib/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule "vim/pludgin_lib/vim-nerdtree-tabs"]
+	path = vim/pludgin_lib/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs
+[submodule "vim/pludgin_lib/vim-auto-save"]
+	path = vim/pludgin_lib/vim-auto-save
+	url = https://github.com/vim-scripts/vim-auto-save
+[submodule "zsh/plugins/zsh-autosuggestions"]
+	path = zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh/plugins/zsh-syntax-highlighting"]
+	path = zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "zsh/plugins/zsh-completions"]
+	path = zsh/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
