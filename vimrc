@@ -6,7 +6,7 @@ endif
 
 " Pathogen -------------------------------- {{{
 " "https://github.com/tpope/vim-pathogen"
-runtime pludgin_lib/vim-pathogen/autoload/pathogen.vim
+runtime plugin_lib/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 " }}}
 
