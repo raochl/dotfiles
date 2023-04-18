@@ -4,12 +4,6 @@ if filereadable("/etc/vimrc")
 endif
 
 
-" Pathogen -------------------------------- {{{
-" "https://github.com/tpope/vim-pathogen"
-"runtime plugin_lib/vim-pathogen/autoload/pathogen.vim
-"execute pathogen#infect()
-" }}}
-
 
 syntax on
 filetype plugin indent on
