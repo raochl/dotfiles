@@ -12,3 +12,30 @@
 	path = zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
 
+[submodule "vim/plugin_lib/vim-airline"]
+	path = vim/pack/vendor/start/vim-airline
+	url = https://github.com/bling/vim-airline
+[submodule "vim/plugin_lib/nerdtree"]
+	path = vim/pack/vendor/start/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule "vim/plugin_lib/vim-nerdtree-tabs"]
+	path = vim/pack/vendor/start/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs
+[submodule "vim/plugin_lib/verilog_systemverilog.vim"]
+	path = vim/pack/vendor/start/verilog_systemverilog.vim
+	url = https://github.com/vhda/verilog_systemverilog.vim
+[submodule "vim/plugin_lib/delimitMate"]
+	path = vim/pack/vendor/start/delimitMate
+	url = https://github.com/Raimondi/delimitMate
+[submodule "vim/plugin_lib/indentLine"]
+	path = vim/pack/vendor/start/indentLine
+	url = https://github.com/Yggdroot/indentLine
+[submodule "vim/plugin_lib/supertab"]
+	path = vim/pack/vendor/start/supertab
+	url = https://github.com/ervandew/supertab
+[submodule "vim/plugin_lib/vim-auto-save"]
+	path = vim/pack/vendor/start/vim-auto-save
+	url = https://github.com/vim-scripts/vim-auto-save
+[submodule "vim/bundle/completor.vim"]
+	path = vim/pack/vendor/start/completor.vim
+	url = https://github.com/maralla/completor.vim
