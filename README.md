@@ -13,7 +13,12 @@ git clone https://github.com/raochl/dotfiles
 dotfiles/install
 ```
 ## Configuration
-Currently, I still add some configuration into my dotfiles. There are some cofiguration I add into my dotfiles:
-
+```yaml
+- bash
+- zsh
+- vim
+- tmux
+- gitconfig
+```
 
 
