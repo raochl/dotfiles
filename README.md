@@ -21,4 +21,18 @@ dotfiles/install
 - gitconfig
 ```
 
+## Note
+About the configuration:
+
+* vim 
+    - use Vim 8+ packages to manager the plugin.
+* tmux
+    - not yet fix plugin.
+* gitadd.sh
+    - used to add submodule with temp file.
+* zsh
+    - copy from [anishathalye](https://github.com/anishathalye/dotfiles) and modify a little bit.
+* gitconfig
+    - not yet learn. Also copy from [anishathalye](https://github.com/anishathalye/dotfiles).
+
 
