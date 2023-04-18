@@ -6,8 +6,8 @@ endif
 
 " Pathogen -------------------------------- {{{
 " "https://github.com/tpope/vim-pathogen"
-runtime pludgin_lib/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+"runtime plugin_lib/vim-pathogen/autoload/pathogen.vim
+"execute pathogen#infect()
 " }}}
 
 
@@ -258,7 +258,7 @@ let g:SuperTabDefaultCompletionType="<c-n>"
 "   "https://github.com/vim-scripts/vim-auto-save"
 "
 " =================================================
-let g:auto_save=1
+let g:auto_save=0
 " Don't save while in insert mode
 let g:auto_save_in_insert_mode = 0
 " do not display the auto-save notification

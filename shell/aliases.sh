@@ -35,6 +35,7 @@ alias mv='mv -i'
 # alias clip='xsel --clipboard'
 alias ipy=ipython
 alias ipy3=ipython3
+alias python=python3
 
 # tmux alias
 alias ta='tmux attach -t'
@@ -43,3 +44,7 @@ alias ts='tmux new-session -s'
 alias tl='tmux list-sessions'
 alias tksv='tmux kill-server'
 alias tkss='tmux kill-session -t'
+
+# environment refresh
+alias szrc='source ~/.zshrc'
+alias sbrc='source ~/.bashrc'

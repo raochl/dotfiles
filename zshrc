@@ -18,4 +18,6 @@ source ~/.shell/function.sh
 
 # ------
 [[ -f ~/.bashrc_local ]] && source ~/.bashrc_local 
+[[ -f ~/localDot/zshrc_local_before ]] && source ~/localDot/zshrc_local_before 
+[[ -f ~/localDot/aliases_local.sh ]] && source ~/localDot/aliases_local.sh
 
