@@ -48,3 +48,6 @@ alias tkss='tmux kill-session -t'
 # environment refresh
 alias szrc='source ~/.zshrc'
 alias sbrc='source ~/.bashrc'
+
+# git
+alias gitlog='git log --all --graph --decorate'
