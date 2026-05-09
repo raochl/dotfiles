@@ -282,3 +282,9 @@ func Setfilehead()
     call append(14, '* ***********************************************************/')
     call append(15, '')
 endfunc
+
+set updatetime=100
+set signcolumn=yes
+nmap <leader>gt :GitGutterBufferToggle<CR>
+nmap <leader>gd :GitGutterDiffOrig<CR>
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)

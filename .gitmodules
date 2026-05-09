@@ -41,3 +41,6 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "vim/pack/vendor/start/vim-gitgutter"]
+	path = vim/pack/vendor/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
