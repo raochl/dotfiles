@@ -14,29 +14,64 @@ setopt prompt_subst
 # Load color variables to make it easier to color things
 autoload -U colors && colors
 
-# Make using 256 colors easier
-if [[ "$(tput colors)" == "256" ]]; then
-    source ~/.zsh/spectrum.zsh
-    # change default colors
-    fg[red]=$FG[160]
-    fg[green]=$FG[064]
-    fg[yellow]=$FG[136]
-    fg[blue]=$FG[033]
-    fg[magenta]=$FG[125]
-    fg[cyan]=$FG[037]
+# Color palette. Prefer truecolor when the terminal is known to support it,
+# but keep a 256-color fallback for SSH and older terminals.
+typeset -gA PR_FG
 
-    fg[teal]=$FG[041]
-    fg[orange]=$FG[166]
-    fg[violet]=$FG[061]
-    fg[neon]=$FG[112]
-    fg[pink]=$FG[183]
+function _pr_rgb() {
+    printf '\033[38;2;%s;%s;%sm' "$1" "$2" "$3"
+}
+
+function _pr_256() {
+    printf '\033[38;5;%sm' "$1"
+}
+
+function _pr_supports_truecolor() {
+    [[ "${COLORTERM}" == "truecolor" || "${COLORTERM}" == "24bit" ]] && return 0
+    [[ -n "${WT_SESSION}" || -n "${KITTY_WINDOW_ID}" || -n "${VTE_VERSION}" ]] && return 0
+    [[ "${TERM}" == *"truecolor"* || "${TERM}" == *"direct"* ]] && return 0
+    if [[ -n "${TMUX}" ]] && command -v tmux >/dev/null 2>&1; then
+        tmux display-message -p '#{client_termfeatures}' 2>/dev/null | grep -q RGB && return 0
+    fi
+    return 1
+}
+
+if _pr_supports_truecolor; then
+    PR_FG[red]="$(_pr_rgb 191 97 106)"
+    PR_FG[green]="$(_pr_rgb 163 190 140)"
+    PR_FG[yellow]="$(_pr_rgb 235 203 139)"
+    PR_FG[blue]="$(_pr_rgb 129 161 193)"
+    PR_FG[magenta]="$(_pr_rgb 180 142 173)"
+    PR_FG[cyan]="$(_pr_rgb 136 192 208)"
+    PR_FG[teal]="$(_pr_rgb 143 188 187)"
+    PR_FG[orange]="$(_pr_rgb 208 135 112)"
+    PR_FG[violet]="$(_pr_rgb 180 142 173)"
+    PR_FG[neon]="$(_pr_rgb 163 190 140)"
+    PR_FG[pink]="$(_pr_rgb 180 142 173)"
+    PR_FG[gray]="$(_pr_rgb 216 222 233)"
+    PR_FG[dim]="$(_pr_rgb 97 112 134)"
 else
-    fg[teal]=$fg[blue]
-    fg[orange]=$fg[yellow]
-    fg[violet]=$fg[magenta]
-    fg[neon]=$fg[green]
-    fg[pink]=$fg[magenta]
+    [[ -f ~/.zsh/spectrum.zsh ]] && source ~/.zsh/spectrum.zsh
+    PR_FG[red]="$(_pr_256 131)"
+    PR_FG[green]="$(_pr_256 150)"
+    PR_FG[yellow]="$(_pr_256 180)"
+    PR_FG[blue]="$(_pr_256 110)"
+    PR_FG[magenta]="$(_pr_256 139)"
+    PR_FG[cyan]="$(_pr_256 116)"
+    PR_FG[teal]="$(_pr_256 109)"
+    PR_FG[orange]="$(_pr_256 180)"
+    PR_FG[violet]="$(_pr_256 139)"
+    PR_FG[neon]="$(_pr_256 150)"
+    PR_FG[pink]="$(_pr_256 139)"
+    PR_FG[gray]="$(_pr_256 249)"
+    PR_FG[dim]="$(_pr_256 240)"
 fi
+
+function pr_color() {
+    echo "%{${PR_FG[$1]}%}"
+}
+
+PR_RESET=$'%{\e[00m%}'
 
 # Current directory, truncated to 3 path elements (or 4 when one of them is "~")
 # The number of elements to keep can be specified as ${1}
@@ -70,12 +105,12 @@ function PR_DIR() {
         last=${last[2,-1]} # take substring
     fi
 
-    echo "%{$fg[green]%}${truncated}%{$fg[orange]%}%B${last}%b%{$reset_color%}"
+    echo "$(pr_color gray)${truncated}$(pr_color cyan)%B${last}%b${PR_RESET}"
 }
 
 # An exclamation point if the previous command did not complete successfully
 function PR_ERROR() {
-    echo "%(?..%(!.%{$fg[violet]%}.%{$fg[red]%})%B!%b%{$reset_color%} )"
+    echo "%(?..%(!.$(pr_color violet).$(pr_color red))%B!%b${PR_RESET} )"
 }
 
 # The arrow symbol that is used in the prompt
@@ -83,7 +118,7 @@ PR_ARROW_CHAR=">"
 
 # The arrow in red (for root) or violet (for regular user)
 function PR_ARROW() {
-    echo "%(!.%{$fg[red]%}.%{$fg[violet]%})${PR_ARROW_CHAR}%{$reset_color%}"
+    echo "%(!.$(pr_color red).$(pr_color green))${PR_ARROW_CHAR}${PR_RESET}"
 }
 
 # Set custom rhs prompt
@@ -91,7 +126,7 @@ function PR_ARROW() {
 RPR_SHOW_USER=true # Set to false to disable user in rhs prompt
 function RPR_USER() {
     if [[ "${RPR_SHOW_USER}" == "true" ]]; then
-        echo "%(!.%{$fg[red]%}.%{$fg[violet]%})%B%n%b%{$reset_color%}"
+        echo "%(!.$(pr_color red).$(pr_color gray))%n${PR_RESET}"
     fi
 }
 
@@ -103,28 +138,18 @@ function machine_name() {
     fi
 }
 
-# Host in a deterministically chosen color
+# Host in a muted color
 RPR_SHOW_HOST=true # Set to false to disable host in rhs prompt
 function RPR_HOST() {
-    local colors
-    colors=(cyan green yellow red pink)
-    local index=$(python <<EOF
-import hashlib
-hash = int(hashlib.sha1('$(machine_name)'.encode('utf8')).hexdigest(), 16)
-index = hash % ${#colors} + 1
-print(index)
-EOF
-    )
-    local color=$colors[index]
     if [[ "${RPR_SHOW_HOST}" == "true" ]]; then
-        echo "%{$fg[$color]%}$(machine_name)%{$reset_color%}"
+        echo "$(pr_color blue)$(machine_name)${PR_RESET}"
     fi
 }
 
-# ' at ' in orange outputted only if both user and host enabled
+# '@' outputted only if both user and host enabled
 function RPR_AT() {
     if [[ "${RPR_SHOW_USER}" == "true" ]] && [[ "${RPR_SHOW_HOST}" == "true" ]]; then
-        echo "%{$fg[blue]%} at %{$reset_color%}"
+        echo "$(pr_color dim)@${PR_RESET}"
     fi
 }
 
@@ -134,17 +159,17 @@ function RPR_INFO() {
 }
 
 # Set RHS prompt for git repositories
-DIFF_SYMBOL="-"
+DIFF_SYMBOL="*"
 GIT_PROMPT_SYMBOL=""
-GIT_PROMPT_PREFIX="%{$fg[violet]%}%B(%b%{$reset_color%}"
-GIT_PROMPT_SUFFIX="%{$fg[violet]%}%B)%b%{$reset_color%}"
-GIT_PROMPT_AHEAD="%{$fg[teal]%}%B+NUM%b%{$reset_color%}"
-GIT_PROMPT_BEHIND="%{$fg[orange]%}%B-NUM%b%{$reset_color%}"
-GIT_PROMPT_MERGING="%{$fg[cyan]%}%Bx%b%{$reset_color%}"
-GIT_PROMPT_UNTRACKED="%{$fg[red]%}%B$DIFF_SYMBOL%b%{$reset_color%}"
-GIT_PROMPT_MODIFIED="%{$fg[yellow]%}%B$DIFF_SYMBOL%b%{$reset_color%}"
-GIT_PROMPT_STAGED="%{$fg[green]%}%B$DIFF_SYMBOL%b%{$reset_color%}"
-GIT_PROMPT_DETACHED="%{$fg[neon]%}%B!%b%{$reset_color%}"
+GIT_PROMPT_PREFIX="$(pr_color dim)(${PR_RESET}"
+GIT_PROMPT_SUFFIX="$(pr_color dim))${PR_RESET}"
+GIT_PROMPT_AHEAD="$(pr_color teal)%B+NUM%b${PR_RESET}"
+GIT_PROMPT_BEHIND="$(pr_color orange)%B-NUM%b${PR_RESET}"
+GIT_PROMPT_MERGING="$(pr_color cyan)%Bx%b${PR_RESET}"
+GIT_PROMPT_UNTRACKED="$(pr_color red)%B$DIFF_SYMBOL%b${PR_RESET}"
+GIT_PROMPT_MODIFIED="$(pr_color yellow)%B$DIFF_SYMBOL%b${PR_RESET}"
+GIT_PROMPT_STAGED="$(pr_color green)%B$DIFF_SYMBOL%b${PR_RESET}"
+GIT_PROMPT_DETACHED="$(pr_color neon)%B!%b${PR_RESET}"
 
 # Show Git branch/tag, or name-rev if on detached head
 function parse_git_branch() {
@@ -211,7 +236,7 @@ function git_prompt_string() {
     if [[ "${RPR_SHOW_GIT}" == "true" ]]; then
         local git_where="$(parse_git_branch)"
         local git_detached="$(parse_git_detached)"
-        [ -n "$git_where" ] && echo " $GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX%{$fg[magenta]%}%B${git_where#(refs/heads/|tags/)}%b$git_detached$GIT_PROMPT_SUFFIX"
+        [ -n "$git_where" ] && echo " $GIT_PROMPT_SYMBOL$(parse_git_state)$GIT_PROMPT_PREFIX$(pr_color green)${git_where#(refs/heads/|tags/)}$git_detached$GIT_PROMPT_SUFFIX"
     fi
 }
 
@@ -273,10 +298,10 @@ function PR_VARS() {
             # if variable is set
             if export | grep -Eq "^${v}="; then
                 # if exported, show regularly
-                printf '%s' "$spc%{$fg[cyan]%}${v}=${(P)${v}}%{$reset_color%}$nl"
+                printf '%s' "$spc$(pr_color cyan)${v}=${(P)${v}}${PR_RESET}$nl"
             else
                 # if not exported, show in red
-                printf '%s' "$spc%{$fg[red]%}${v}=${(P)${v}}%{$reset_color%}$nl"
+                printf '%s' "$spc$(pr_color red)${v}=${(P)${v}}${PR_RESET}$nl"
             fi
         fi
     done
@@ -288,7 +313,7 @@ function PR_VARS() {
                 # not shown yet
                 if export | grep -Eq "^${v}="; then
                     # exported
-                    printf '%s' "$spc%{$fg[cyan]%}${v}=${(P)${v}}%{$reset_color%}$nl"
+                    printf '%s' "$spc$(pr_color cyan)${v}=${(P)${v}}${PR_RESET}$nl"
                 fi
             fi
         fi

@@ -9,8 +9,12 @@ export EDITOR=vim
 # prompt 
 source ~/.bash/prompt.bash
 
-# alias 
+# shell colors
+if [ -f ~/.shell/colors.sh ]; then
+    source ~/.shell/colors.sh
+fi
 
+# alias
 if [ -f ~/.shell/aliases.sh ]; then 
     source ~/.shell/aliases.sh
 fi
@@ -26,11 +30,11 @@ export HISTFILESIZE=500000
 export HISTSIZE=500000
 shopt -s histappend # append to history file
 # tabs shoule be 4 chars long
-tabs 4
+if [[ $- == *i* ]] && [[ -t 1 ]]; then
+    tabs 4
+fi
 
 # Local customizations allowed and encouraged!
 if [ -f ~/.bashrc_local ]; then 
     source ~/.bashrc_local 
 fi 
-
-

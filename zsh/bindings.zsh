@@ -29,7 +29,7 @@ key[PageDown]=${terminfo[knp]}
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+if [[ -o interactive ]] && [[ -t 1 ]] && (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
 function zle-line-init () {
     printf '%s' "${terminfo[smkx]}"
 }

@@ -13,6 +13,7 @@ source ~/.zsh/prompt.zsh
 source ~/.zsh/completion.zsh
 source ~/.zsh/plugins.zsh
 
+[[ -f ~/.shell/colors.sh ]] && source ~/.shell/colors.sh
 source ~/.shell/aliases.sh
 source ~/.shell/function.sh
 
@@ -21,3 +22,4 @@ source ~/.shell/function.sh
 [[ -f ~/localDot/zshrc_local_before ]] && source ~/localDot/zshrc_local_before 
 [[ -f ~/localDot/aliases_local.sh ]] && source ~/localDot/aliases_local.sh
 
+setopt NO_BEEP
