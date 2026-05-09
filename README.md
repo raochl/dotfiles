@@ -17,6 +17,7 @@ dotfiles/install
 - bash
 - zsh
 - vim
+- nvim
 - tmux
 - gitconfig
 ```
@@ -26,6 +27,8 @@ About the configuration:
 
 * vim 
     - use Vim 8+ packages to manager the plugin.
+* nvim
+    - use Lua config and lazy.nvim; kept separate from vimrc.
 * tmux
     - not yet fix plugin.
 * gitadd.sh
@@ -34,5 +37,4 @@ About the configuration:
     - copy from [anishathalye](https://github.com/anishathalye/dotfiles) and modify a little bit.
 * gitconfig
     - not yet learn. Also copy from [anishathalye](https://github.com/anishathalye/dotfiles).
-
 
