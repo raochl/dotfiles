@@ -12,6 +12,16 @@ cd ~
 git clone https://github.com/raochl/dotfiles
 dotfiles/install
 ```
+
+For a fresh macOS machine, use:
+```bash
+cd ~/dotfiles
+./install-macos.sh
+```
+
+If npm, Homebrew, GitHub, or Mason has network trouble, see
+[`docs/new-machine-setup.md`](docs/new-machine-setup.md).
+
 ## Configuration
 ```yaml
 - bash
@@ -21,6 +31,27 @@ dotfiles/install
 - tmux
 - gitconfig
 ```
+
+## Proxy
+The proxy helper lives at `~/.shell/proxy.sh` and is loaded automatically by zsh.
+Use these helpers when you need to toggle or inspect proxy settings:
+
+```bash
+proxy-status
+proxy-on
+proxy-off
+```
+
+Defaults:
+```bash
+DOTFILES_PROXY_HOST=127.0.0.1
+DOTFILES_PROXY_PORT=7897
+DOTFILES_NPM_REGISTRY=https://registry.npmmirror.com
+DOTFILES_NPM_CAFILE=$(brew --prefix ca-certificates)/share/ca-certificates/cacert.pem
+```
+
+Use `~/.config/dotfiles/proxy.local.sh` or `~/.proxyrc` for local overrides.
+After sourcing it, run `proxy-status` to inspect the active settings.
 
 ## Note
 About the configuration:
@@ -37,4 +68,3 @@ About the configuration:
     - copy from [anishathalye](https://github.com/anishathalye/dotfiles) and modify a little bit.
 * gitconfig
     - not yet learn. Also copy from [anishathalye](https://github.com/anishathalye/dotfiles).
-

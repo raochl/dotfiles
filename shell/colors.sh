@@ -2,7 +2,10 @@
 
 # Shell color configuration shared by bash and zsh.
 
-if [ -x /usr/bin/dircolors ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
+    export CLICOLOR=1
+    export LSCOLORS="${LSCOLORS:-ExGxBxDxCxEgEdxbxgxcxd}"
+elif [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
     # WSL DrvFs often marks Windows directories as 777, triggering GNU ls's

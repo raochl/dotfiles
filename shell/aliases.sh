@@ -10,7 +10,13 @@ alias -- -='cd -'
 # better clear
 alias cl='clear'
 
-if [ -x /usr/bin/dircolors ]; then
+if [[ "$OSTYPE" == darwin* ]]; then
+    export CLICOLOR=1
+    export LSCOLORS=${LSCOLORS:-ExGxBxDxCxEgEdxbxgxcxd}
+    alias ls='ls -G'
+    alias ll='ls -Glh'
+    alias la='ls -Gla'
+elif [ -x /usr/bin/dircolors ]; then
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
@@ -22,8 +28,8 @@ fi
 
 
 # GNU ls would say --color=auto 
-alias ll='ls -lh'
-alias la='ls -la'
+alias ll >/dev/null 2>&1 || alias ll='ls -lh'
+alias la >/dev/null 2>&1 || alias la='ls -la'
 alias cpr='cp -r'
 alias dfh='df -h'
 alias kill9='kill -9'

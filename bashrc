@@ -4,7 +4,8 @@ if [ -f /etc/bash.bashrc ]; then
     source /etc/bash.bashrc 
 fi
 
-export EDITOR=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # prompt 
 source ~/.bash/prompt.bash

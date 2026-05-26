@@ -3,6 +3,12 @@ if filereadable("/etc/vimrc")
     source /etc/vimrc 
 endif
 
+" completor.vim needs Python support. macOS system Vim lacks +python3, so
+" disable only that plugin there; Homebrew Vim will still load it.
+if !has('nvim') && !(has('pythonx') || has('python3') || has('python'))
+    let g:loaded_completor_plugin = 1
+endif
+
 
 
 syntax on
@@ -37,10 +43,21 @@ set tabstop=4
 set noexpandtab
 set scrolloff=5
 "set cindent
-set clipboard=unnamedplus	" make yank reg to os regfile"
+" Keep Vim's default register internal. Homebrew terminal Vim's + register can
+" fail to update on macOS, which makes yy followed by p paste stale clipboard.
+set clipboard=
 set wildmode=longest,list	" tab completion for files/buffers"
 set wildmenu 
 "set cursorline
+
+if !has('nvim') && has('mac') && executable('pbcopy')
+    augroup macos_yank_to_clipboard
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' |
+            \ call system('pbcopy', join(v:event.regcontents, "\n") . (v:event.regtype ==# 'V' ? "\n" : "")) |
+            \ endif
+    augroup END
+endif
 
 
 " Trailing whitespace highlighting -------------- {{{

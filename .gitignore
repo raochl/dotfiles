@@ -13,5 +13,9 @@
 *.bak 
 
 *.log*
+.nvimlog
 *.old
 
+# Runtime tmux plugins installed by TPM. Keep the TPM submodule tracked.
+tmux/plugins/*
+!tmux/plugins/tpm/

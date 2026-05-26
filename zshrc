@@ -8,6 +8,7 @@
 
 source ~/.zsh/setopt.zsh
 source ~/.zsh/export.zsh
+[[ -f ~/.shell/proxy.sh ]] && source ~/.shell/proxy.sh
 source ~/.zsh/bindings.zsh
 source ~/.zsh/prompt.zsh 
 source ~/.zsh/completion.zsh

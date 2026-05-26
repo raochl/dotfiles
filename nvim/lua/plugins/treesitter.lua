@@ -15,11 +15,11 @@ local parsers = {
   'python',
   'rust',
   'sql',
+  'systemverilog',
   'terraform',
   'toml',
   'tsx',
   'typescript',
-  'verilog',
   'vim',
   'vimdoc',
   'yaml',
@@ -42,6 +42,7 @@ local filetypes = {
   'rust',
   'sh',
   'sql',
+  'systemverilog',
   'terraform',
   'toml',
   'typescript',
@@ -67,12 +68,14 @@ return {
 
     vim.filetype.add {
       extension = {
-        sv = 'verilog',
-        svh = 'verilog',
+        sv = 'systemverilog',
+        svh = 'systemverilog',
         tf = 'terraform',
         tfvars = 'terraform',
       },
     }
+
+    vim.treesitter.language.register('systemverilog', 'verilog')
 
     vim.api.nvim_create_autocmd('FileType', {
       pattern = filetypes,

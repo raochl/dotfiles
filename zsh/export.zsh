@@ -2,8 +2,9 @@
 
 # ============ Exports =================
 
-# Default editor is vim
-export EDITOR='vim'
+# Default editor is Neovim
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # Default terminal is xterm
 #export TERMINAL=xterm-256color
