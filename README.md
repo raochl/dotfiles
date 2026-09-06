@@ -26,11 +26,15 @@ If npm, Homebrew, GitHub, or Mason has network trouble, see
 ```yaml
 - bash
 - zsh
+- herdr
 - vim
 - nvim
 - tmux
 - gitconfig
 ```
+
+Herdr's portable configuration is tracked at `herdr/config.toml` and linked to
+`~/.config/herdr/config.toml`. Session state and logs remain machine-local.
 
 ## Proxy
 The proxy helper lives at `~/.shell/proxy.sh` and is loaded automatically by zsh.

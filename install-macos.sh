@@ -11,6 +11,7 @@ cd "$(dirname "$0")"
 
 echo "==> Installing macOS CLI dependencies"
 brew install \
+  herdr \
   neovim \
   vim \
   tmux \

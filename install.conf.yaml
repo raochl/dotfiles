@@ -15,6 +15,9 @@
     ~/.gitconfig:
     ~/.gitignore_global:
     ~/.config/nvim: nvim
+    ~/.config/herdr/config.toml:
+        force: true
+        path: herdr/config.toml
     ~/.shell:
     ~/.zsh:
     ~/.tmux:
