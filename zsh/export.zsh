@@ -17,5 +17,5 @@ export GREP_COLOR='3;33'
 test -d "/usr/bin/vendor_perl" && PATH="$PATH:/usr/bin/vendor_perl"
 
 # If we have a local bin, add it
-test -d "$HOME/bin" && PATH="$HOME/bin:$PATH"
-test -d "$HOME/.local/bin" && PATH="$HOME/.local/bin:$PATH"
+test -d "$HOME/bin" && export PATH="$HOME/bin:$PATH"
+test -d "$HOME/.local/bin" && export PATH="$HOME/.local/bin:$PATH"

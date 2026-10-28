@@ -24,3 +24,13 @@ source ~/.shell/function.sh
 [[ -f ~/localDot/aliases_local.sh ]] && source ~/localDot/aliases_local.sh
 
 setopt NO_BEEP
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# >>> Hermes Studio CLI shim >>>
+case ":$PATH:" in
+  *":$HOME/bin:"*) ;;
+  *) export PATH="$HOME/bin:$PATH" ;;
+esac
+# <<< Hermes Studio CLI shim <<<

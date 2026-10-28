@@ -18,7 +18,7 @@ fi
 : "${DOTFILES_PROXY_PORT:=7897}"
 : "${DOTFILES_PROXY_HTTP_SCHEME:=http}"
 : "${DOTFILES_PROXY_ALL_SCHEME:=socks5h}"
-: "${DOTFILES_NO_PROXY:=localhost,127.0.0.1,::1,github.com,api.github.com,raw.githubusercontent.com,ghcr.io,mirrors.aliyun.com,mirrors.tuna.tsinghua.edu.cn,mirrors.ustc.edu.cn}"
+: "${DOTFILES_NO_PROXY:=localhost,127.0.0.1,::1,mirrors.aliyun.com,mirrors.tuna.tsinghua.edu.cn,mirrors.ustc.edu.cn}"
 
 : "${DOTFILES_NPM_REGISTRY:=https://registry.npmmirror.com}"
 : "${DOTFILES_NPM_STRICT_SSL:=true}"
