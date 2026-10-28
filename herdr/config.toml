@@ -1,3 +1,4 @@
+onboarding = false
 [keys]
 # Match the tmux prefix.
 prefix = "ctrl+a"
@@ -44,3 +45,19 @@ remote_image_paste = "ctrl+alt+v"
 [ui.sidebar.agents.rows_by_agent]
 # OMP: show the live task title and explicit lifecycle state.
 omp = [["state_icon", "workspace"], ["terminal_title_stripped"], ["agent", "state_text"]]
+
+[theme]
+# Follow the host terminal's ANSI palette (Ghostty "Nord Light").
+name = "terminal"
+
+# While prefix mode is active, switch the host input source to an
+# ASCII-capable mode so prefix commands work under a Chinese IME,
+# then restore the previous input source when prefix mode exits.
+[experimental]
+switch_ascii_input_source_in_prefix = true
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+[ui.toast]
+delivery = "herdr"

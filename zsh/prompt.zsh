@@ -14,7 +14,9 @@ setopt prompt_subst
 # Load color variables to make it easier to color things
 autoload -U colors && colors
 
-# Color palette. Prefer truecolor when the terminal is known to support it,
+# Color palette. Nord, tuned for the dark terminal background (Ghostty theme
+# "Nord", bg #2E3440).
+# Prefer truecolor when the terminal is known to support it,
 # but keep a 256-color fallback for SSH and older terminals.
 typeset -gA PR_FG
 
