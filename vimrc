@@ -283,11 +283,11 @@ autocmd BufNewFile *.v,*.sv exec ":call Setfilehead()"
 
 func Setfilehead()
     call append(0, '/*************************************************************')
-    call append(1, '*	Copyright(C) '.strftime("%Y").' SHTU_VSP')
+    call append(1, '*	Copyright(C) '.strftime("%Y"))
     call append(2, '*	    All right reserved')
     call append(3, '*')
     call append(4, '*	FILE NAME:  '.expand('%'))
-    call append(5, '*	   AUTHOR:  Chaolin')
+    call append(5, '*	   AUTHOR:  ')
     call append(6, '*	     DATE:  '.strftime('%Y-%m-%d %H:%M:%S'))
     call append(7, '*	  Version:  ')
     call append(8, '*')

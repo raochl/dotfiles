@@ -19,3 +19,11 @@
 # Runtime tmux plugins installed by TPM. Keep the TPM submodule tracked.
 tmux/plugins/*
 !tmux/plugins/tpm/
+
+# Private overrides belong outside the portable configuration.
+/.gitconfig_local
+/.proxyrc
+/proxy.local.sh
+/.zshrc_local*
+/.bashrc_local
+/localDot/
