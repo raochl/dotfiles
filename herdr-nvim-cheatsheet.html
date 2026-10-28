@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghostty + Herdr + Neovim 快捷键速查表</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5f6b76;
+      --line: #c9d1d8;
+      --paper: #fff;
+      --ghostty: #8a4b20;
+      --ghostty-soft: #fbf0e7;
+      --herdr: #24507a;
+      --herdr-soft: #eaf2f8;
+      --nvim: #39724d;
+      --nvim-soft: #ebf5ee;
+      --key-bg: #f3f5f7;
+      --key-border: #aab4bd;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      background: #dfe4e8;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 9px;
+      line-height: 1.22;
+    }
+
+    body { padding: 12px; }
+
+    .sheet {
+      width: 297mm;
+      height: 210mm;
+      margin: 0 auto;
+      padding: 7mm 7mm 5mm;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 5px 24px rgba(23, 33, 43, .18);
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 8mm;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 2.4mm;
+      margin-bottom: 3mm;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: -.3px;
+    }
+
+    .subtitle {
+      margin-top: 1.5mm;
+      color: var(--muted);
+      font-size: 8.2px;
+    }
+
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: .94fr 1fr 1fr 1fr;
+      gap: 3mm;
+      align-items: start;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2mm;
+      min-width: 0;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 2mm;
+      overflow: hidden;
+      break-inside: avoid;
+      background: #fff;
+    }
+
+    .card h2,
+    .card h3 {
+      margin: 0;
+      padding: 1.45mm 2mm 1.25mm;
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: .1px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .herdr h2, .herdr h3 {
+      color: var(--herdr);
+      background: var(--herdr-soft);
+    }
+
+    .nvim h2, .nvim h3 {
+      color: var(--nvim);
+      background: var(--nvim-soft);
+    }
+    .ghostty-card h2, .ghostty-card h3 {
+      color: var(--ghostty);
+      background: var(--ghostty-soft);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 1.8mm;
+      padding: 1mm 1.6mm 1.2mm;
+    }
+
+    .mini-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1mm;
+      min-height: 3.4mm;
+      padding: .35mm 0;
+      border-bottom: .25px dotted #d8dde2;
+    }
+
+    .mini-item:nth-last-child(-n+2) { border-bottom: 0; }
+    .mini-item .keys { flex-wrap: nowrap; }
+    .mini-item .action { color: #3f4b55; white-space: nowrap; }
+
+    .rows { padding: 1mm 1.6mm 1.25mm; }
+
+    .row {
+      display: grid;
+      grid-template-columns: minmax(22mm, auto) 1fr;
+      align-items: baseline;
+      gap: 1.5mm;
+      min-height: 3.55mm;
+      padding: .38mm 0;
+      border-bottom: .25px dotted #d8dde2;
+    }
+
+    .row:last-child { border-bottom: 0; }
+
+    .keys {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .55mm;
+      white-space: nowrap;
+    }
+
+    kbd {
+      display: inline-block;
+      min-width: 3.4mm;
+      padding: .25mm .7mm;
+      border: 1px solid var(--key-border);
+      border-bottom-width: 1.5px;
+      border-radius: .8mm;
+      background: var(--key-bg);
+      color: #111820;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 7.6px;
+      font-weight: 650;
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .plus, .or, .then {
+      color: var(--muted);
+      font-size: 7px;
+    }
+
+    .action { min-width: 0; }
+    .dim { color: var(--muted); }
+
+    .callout {
+      padding: 1.5mm 1.8mm;
+      border-left: 2.2mm solid var(--herdr);
+      background: #f6f9fb;
+      color: #314150;
+      font-size: 7.8px;
+      line-height: 1.3;
+    }
+
+    .callout strong { color: var(--herdr); }
+
+    .mode {
+      display: inline-block;
+      margin-left: .7mm;
+      padding: .1mm .55mm;
+      border-radius: .7mm;
+      color: #51606d;
+      background: #eef1f3;
+      font-size: 6.6px;
+      font-weight: 700;
+      vertical-align: 1px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.2mm;
+      padding-top: 1.4mm;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 7.2px;
+    }
+
+    .accent-ghostty { color: var(--ghostty); font-weight: 700; }
+    .accent-herdr { color: var(--herdr); font-weight: 700; }
+    .accent-nvim { color: var(--nvim); font-weight: 700; }
+
+    @page { size: A4 landscape; margin: 0; }
+
+    @media print {
+      html, body {
+        width: 297mm;
+        height: 210mm;
+        background: #fff;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      body { padding: 0; }
+      .sheet { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<main class="sheet">
+  <header>
+    <div>
+      <h1>Ghostty + Herdr + Neovim 快捷键速查表</h1>
+      <div class="subtitle">当前实际配置 · A4 横向单页 · Prefix / Leader 均为顺序按键，不需要同时按住</div>
+    </div>
+    <div class="legend">
+      <span class="accent-herdr">Herdr Prefix</span>
+      <kbd>Ctrl</kbd><span class="plus">+</span><kbd>A</kbd>
+      <span class="then">然后</span>
+      <span class="accent-nvim">Nvim Leader</span>
+      <kbd>Space</kbd>
+    </div>
+  </header>
+
+  <section class="columns">
+    <div class="column herdr">
+      <section class="card ghostty-card">
+        <h2>GHOSTTY · macOS</h2>
+        <div class="mini-grid">
+          <div class="mini-item"><div class="keys"><kbd>Cmd-c/v</kbd></div><div class="action">复制 / 粘贴</div></div>
+          <div class="mini-item"><div class="keys"><kbd>右键</kbd></div><div class="action">粘贴</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Cmd-t/w</kbd></div><div class="action">新建 / 关闭 Tab</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Cmd-n</kbd></div><div class="action">新窗口</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Cmd-f</kbd></div><div class="action">搜索</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Cmd-Enter</kbd></div><div class="action">全屏</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Cmd +/-/0</kbd></div><div class="action">字号</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Option-←/→</kbd></div><div class="action">按词移动</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Cmd-,</kbd></div><div class="action">打开配置</div></div>
+          <div class="mini-item"><div class="keys"><kbd>Cmd-Shift-,</kbd></div><div class="action">重载配置</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>HERDR · 会话与帮助</h2>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>?</kbd></div><div class="action">全部快捷键</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>s</kbd></div><div class="action">设置</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>r</kbd></div><div class="action">重载配置</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>d</kbd></div><div class="action">Detach，后台继续运行</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>`</kbd></div><div class="action">切换侧边栏</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Workspace</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>w</kbd></div><div class="action">Workspace 选择器</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>Shift</kbd><kbd>c</kbd></div><div class="action">新建 Workspace</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>Shift</kbd><kbd>d</kbd></div><div class="action">关闭 Workspace</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Tab</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>c</kbd></div><div class="action">新建 Tab</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>b</kbd><span class="or">/</span><kbd>←</kbd></div><div class="action">上一个 Tab</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>n</kbd><span class="or">/</span><kbd>→</kbd></div><div class="action">下一个 Tab</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>Shift</kbd><kbd>b</kbd></div><div class="action">Tab 向前移动</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>Shift</kbd><kbd>n</kbd></div><div class="action">Tab 向后移动</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>Shift</kbd><kbd>x</kbd></div><div class="action">关闭 Tab</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Pane</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>h/j/k/l</kbd></div><div class="action">聚焦左/下/上/右</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>|</kbd></div><div class="action">左右分割</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>-</kbd></div><div class="action">上下分割</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>x</kbd></div><div class="action">关闭 Pane</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>m</kbd></div><div class="action">最大化 / 恢复</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>[</kbd></div><div class="action">复制模式</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>Shift</kbd><kbd>h/j/k/l</kbd></div><div class="action">调整 Pane 大小</div></div>
+          <div class="row"><div class="keys"><kbd>Prefix</kbd><kbd>&lt;</kbd><span class="or">/</span><kbd>&gt;</kbd></div><div class="action">向上 / 向下交换</div></div>
+        </div>
+      </section>
+
+      <aside class="callout">
+        <strong>Remote 图片 → OMP</strong><br>
+        复制图片后按 <kbd>Ctrl</kbd>+<kbd>Option</kbd>+<kbd>v</kbd>。仅在本机执行的 <code>herdr --remote</code> 中生效。
+      </aside>
+    </div>
+
+    <div class="column nvim">
+      <section class="card">
+        <h2>NVIM · 保存与模式</h2>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Ctrl-s</kbd><span class="or">/</span><kbd>S</kbd></div><div class="action">保存 <span class="mode">N</span></div></div>
+          <div class="row"><div class="keys"><kbd>Q</kbd></div><div class="action">保存并退出窗口 <span class="mode">N</span></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>Q</kbd></div><div class="action">退出 Neovim <span class="mode">N</span></div></div>
+          <div class="row"><div class="keys"><kbd>R</kbd></div><div class="action">重载配置 <span class="mode">N</span></div></div>
+          <div class="row"><div class="keys"><kbd>j k</kbd><span class="or">/</span><kbd>k j</kbd></div><div class="action">返回 Normal <span class="mode">I</span></div></div>
+          <div class="row"><div class="keys"><kbd>Esc</kbd></div><div class="action">清除搜索高亮 <span class="mode">N</span></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>v</kbd></div><div class="action">矩形选择 <span class="mode">N</span></div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>文件与文件树</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>e</kbd></div><div class="action">切换左侧 Neo-tree</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>w</kbd></div><div class="action">浮动 Neo-tree</div></div>
+          <div class="row"><div class="keys"><kbd>\</kbd></div><div class="action">定位当前文件</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>n g s</kbd></div><div class="action">Git 状态树</div></div>
+          <div class="row"><div class="keys"><kbd>-</kbd></div><div class="action">Oil 文件浏览器 / 上级目录</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Neo-tree 内</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Enter</kbd><span class="or">/</span><kbd>l</kbd></div><div class="action">打开文件 / 展开</div></div>
+          <div class="row"><div class="keys"><kbd>h</kbd></div><div class="action">收起目录</div></div>
+          <div class="row"><div class="keys"><kbd>a</kbd><span class="or">/</span><kbd>A</kbd></div><div class="action">新建文件 / 目录</div></div>
+          <div class="row"><div class="keys"><kbd>r</kbd><span class="or">/</span><kbd>d</kbd></div><div class="action">重命名 / 删除</div></div>
+          <div class="row"><div class="keys"><kbd>y</kbd><kbd>x</kbd><kbd>p</kbd></div><div class="action">复制 / 剪切 / 粘贴</div></div>
+          <div class="row"><div class="keys"><kbd>s</kbd><span class="or">/</span><kbd>S</kbd><span class="or">/</span><kbd>t</kbd></div><div class="action">竖分屏 / 横分屏 / Tab</div></div>
+          <div class="row"><div class="keys"><kbd>/</kbd></div><div class="action">模糊查找</div></div>
+          <div class="row"><div class="keys"><kbd>H</kbd></div><div class="action">显示 / 隐藏过滤文件</div></div>
+          <div class="row"><div class="keys"><kbd>q</kbd><span class="or">/</span><kbd>?</kbd></div><div class="action">关闭 / 帮助</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Buffer 与 Tab</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Tab</kbd><span class="or">/</span><kbd>Shift-Tab</kbd></div><div class="action">下 / 上一个 Buffer</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>x</kbd></div><div class="action">关闭 Buffer</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>b</kbd></div><div class="action">新建 Buffer</div></div>
+          <div class="row"><div class="keys"><kbd>t b u/c/f/n</kbd></div><div class="action">Tab 新建/关闭/前/后</div></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="column nvim">
+      <section class="card">
+        <h2>NVIM · Telescope 搜索</h2>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s f</kbd></div><div class="action">搜索文件</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s g</kbd></div><div class="action">全项目内容搜索</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s w</kbd></div><div class="action">搜索光标下单词</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>/</kbd></div><div class="action">当前文件内搜索</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>Space</kbd></div><div class="action">Buffer 列表</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s o</kbd></div><div class="action">最近文件</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s d</kbd></div><div class="action">搜索诊断</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s h</kbd></div><div class="action">搜索帮助</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s r</kbd></div><div class="action">恢复上次搜索</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>g f/s</kbd></div><div class="action">Git 文件 / 状态</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>g c</kbd></div><div class="action">Git commits</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>g b</kbd></div><div class="action">Git branches</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Telescope 内</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Ctrl-j</kbd><span class="or">/</span><kbd>Ctrl-k</kbd></div><div class="action">下 / 上一个候选</div></div>
+          <div class="row"><div class="keys"><kbd>Ctrl-l</kbd><span class="or">/</span><kbd>Enter</kbd></div><div class="action">打开选中项</div></div>
+          <div class="row"><div class="keys"><kbd>q</kbd></div><div class="action">关闭 <span class="mode">N</span></div></div>
+          <div class="row"><div class="keys"><kbd>d</kbd></div><div class="action">删除 Buffer <span class="mode">BUFFER</span></div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>窗口与导航</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Ctrl-h/j/k/l</kbd></div><div class="action">跨 Nvim / Tmux 窗口移动</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>h/j/k/l</kbd></div><div class="action">Nvim 窗口移动</div></div>
+          <div class="row"><div class="keys"><kbd>s r</kbd><span class="or">/</span><kbd>s l</kbd></div><div class="action">向右 / 左垂直分屏</div></div>
+          <div class="row"><div class="keys"><kbd>s b</kbd><span class="or">/</span><kbd>s u</kbd></div><div class="action">向下 / 上水平分屏</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s e</kbd></div><div class="action">平均窗口大小</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>x s</kbd></div><div class="action">关闭分屏</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>↑/↓/←/→</kbd></div><div class="action">调整窗口尺寸</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>会话与显示</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s s</kbd></div><div class="action">保存项目会话</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>s l</kbd></div><div class="action">加载项目会话</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>l w</kbd></div><div class="action">切换自动换行</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>b g</kbd></div><div class="action">切换透明背景</div></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="column nvim">
+      <section class="card">
+        <h2>NVIM · LSP 与诊断</h2>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>g d</kbd></div><div class="action">定义</div></div>
+          <div class="row"><div class="keys"><kbd>g r</kbd></div><div class="action">引用</div></div>
+          <div class="row"><div class="keys"><kbd>g I</kbd></div><div class="action">实现</div></div>
+          <div class="row"><div class="keys"><kbd>g D</kbd></div><div class="action">声明</div></div>
+          <div class="row"><div class="keys"><kbd>K</kbd></div><div class="action">悬浮文档</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>D</kbd></div><div class="action">类型定义</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>r n</kbd></div><div class="action">重命名符号</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>c a</kbd></div><div class="action">Code Action</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>d s</kbd></div><div class="action">当前文件符号</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>w s</kbd></div><div class="action">Workspace 符号</div></div>
+          <div class="row"><div class="keys"><kbd>[ d</kbd><span class="or">/</span><kbd>] d</kbd></div><div class="action">上 / 下一个诊断</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>d</kbd></div><div class="action">当前行诊断</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>d o</kbd></div><div class="action">开关诊断</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>q</kbd></div><div class="action">诊断列表</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>编辑</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Ctrl-/</kbd></div><div class="action">注释 / 取消注释 <span class="mode">N/V</span></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>y</kbd></div><div class="action">复制到系统剪贴板 <span class="mode">N/V</span></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>Y</kbd></div><div class="action">整行复制到系统剪贴板</div></div>
+          <div class="row"><div class="keys"><kbd>x</kbd></div><div class="action">删除且不覆盖寄存器</div></div>
+          <div class="row"><div class="keys"><kbd>p</kbd></div><div class="action">替换且保留寄存器 <span class="mode">V</span></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>.</kbd><span class="or">/</span><kbd>,</kbd></div><div class="action">增加 / 减少缩进</div></div>
+          <div class="row"><div class="keys"><kbd>Option-j/k</kbd></div><div class="action">移动选中内容 <span class="mode">V</span></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>r w</kbd></div><div class="action">替换当前单词</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><kbd>+/-</kbd></div><div class="action">数字加一 / 减一</div></div>
+          <div class="row"><div class="keys"><kbd>Ctrl-d/u</kbd></div><div class="action">半页下 / 上并居中</div></div>
+          <div class="row"><div class="keys"><kbd>n</kbd><span class="or">/</span><kbd>N</kbd></div><div class="action">搜索结果前进 / 后退</div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Insert 自动补全</h3>
+        <div class="rows">
+          <div class="row"><div class="keys"><kbd>Ctrl-c</kbd></div><div class="action">触发补全</div></div>
+          <div class="row"><div class="keys"><kbd>Ctrl-j/k</kbd></div><div class="action">下 / 上一个候选</div></div>
+          <div class="row"><div class="keys"><kbd>Enter</kbd></div><div class="action">接受候选</div></div>
+          <div class="row"><div class="keys"><kbd>Tab</kbd><span class="or">/</span><kbd>Shift-Tab</kbd></div><div class="action">候选或 Snippet 前 / 后</div></div>
+          <div class="row"><div class="keys"><kbd>Ctrl-l/h</kbd></div><div class="action">Snippet 下 / 上一位置</div></div>
+          <div class="row"><div class="keys"><kbd>Ctrl-Backspace</kbd></div><div class="action">删除前一个单词</div></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <footer>
+    <span><b>N</b> Normal · <b>I</b> Insert · <b>V</b> Visual · 单独的大写字母表示 Shift+字母</span>
+    <span>Herdr：<kbd>Prefix</kbd><kbd>?</kbd>　Neovim：按 <kbd>Space</kbd> 等待 WhichKey</span>
+  </footer>
+</main>
+</body>
+</html>
